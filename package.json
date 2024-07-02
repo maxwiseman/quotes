@@ -1,9 +1,18 @@
 {
   "name": "turbo-template",
-  "private": true,
+  "devDependencies": {
+    "@quotes/prettier-config": "^0.1.0",
+    "@turbo/gen": "^1.12.4",
+    "prettier": "^3.2.5",
+    "turbo": "^1.12.4",
+    "typescript": "^5.3.3"
+  },
   "engines": {
     "node": ">=20.11.1"
   },
+  "packageManager": "bun@1.0.29",
+  "prettier": "@quotes/prettier-config",
+  "private": true,
   "scripts": {
     "build": "turbo build",
     "clean": "git clean -xdf node_modules",
@@ -20,15 +29,6 @@
     "postinstall": "bun lint:ws",
     "typecheck": "turbo typecheck"
   },
-  "devDependencies": {
-    "@quotes/prettier-config": "^0.1.0",
-    "@turbo/gen": "^1.12.4",
-    "prettier": "^3.2.5",
-    "turbo": "^1.12.4",
-    "typescript": "^5.3.3"
-  },
-  "prettier": "@quotes/prettier-config",
-  "packageManager": "bun@1.0.29",
   "workspaces": [
     "apps/*",
     "packages/*",

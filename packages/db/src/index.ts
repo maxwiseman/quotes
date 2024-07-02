@@ -2,9 +2,12 @@ import { createClient } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
 
 import * as auth from "./schema/auth";
-import * as post from "./schema/post";
+import { show } from "./schema/show";
+import { season } from "./schema/season";
+import { quote } from "./schema/quote";
+import { episode } from "./schema/episode";
 
-export const schema = { ...auth, ...post };
+export const schema = { ...auth, ...show, ...season, ...quote, ...episode };
 
 export { sqliteTable as tableCreator } from "./schema/_table";
 

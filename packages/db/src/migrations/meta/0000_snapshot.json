@@ -1,11 +1,11 @@
 {
   "version": "5",
   "dialect": "sqlite",
-  "id": "4f65183a-8d89-432c-b1ef-8cd069ed5d91",
+  "id": "aa458ebe-03b3-4784-b619-370dd595e36c",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
-    "turbo_account": {
-      "name": "turbo_account",
+    "quotes_account": {
+      "name": "quotes_account",
       "columns": {
         "userId": {
           "name": "userId",
@@ -96,18 +96,18 @@
       },
       "foreignKeys": {},
       "compositePrimaryKeys": {
-        "turbo_account_provider_providerAccountId_pk": {
+        "quotes_account_provider_providerAccountId_pk": {
           "columns": [
             "provider",
             "providerAccountId"
           ],
-          "name": "turbo_account_provider_providerAccountId_pk"
+          "name": "quotes_account_provider_providerAccountId_pk"
         }
       },
       "uniqueConstraints": {}
     },
-    "turbo_session": {
-      "name": "turbo_session",
+    "quotes_session": {
+      "name": "quotes_session",
       "columns": {
         "sessionToken": {
           "name": "sessionToken",
@@ -144,8 +144,8 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "turbo_user": {
-      "name": "turbo_user",
+    "quotes_user": {
+      "name": "quotes_user",
       "columns": {
         "id": {
           "name": "id",
@@ -189,8 +189,8 @@
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
-    "turbo_verificationToken": {
-      "name": "turbo_verificationToken",
+    "quotes_verificationToken": {
+      "name": "quotes_verificationToken",
       "columns": {
         "identifier": {
           "name": "identifier",
@@ -217,51 +217,203 @@
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {
-        "turbo_verificationToken_identifier_token_pk": {
+        "quotes_verificationToken_identifier_token_pk": {
           "columns": [
             "identifier",
             "token"
           ],
-          "name": "turbo_verificationToken_identifier_token_pk"
+          "name": "quotes_verificationToken_identifier_token_pk"
         }
       },
       "uniqueConstraints": {}
     },
-    "turbo_post": {
-      "name": "turbo_post",
+    "quotes_episode": {
+      "name": "quotes_episode",
       "columns": {
         "id": {
           "name": "id",
           "type": "integer",
           "primaryKey": true,
           "notNull": true,
+          "autoincrement": true
+        },
+        "season_id": {
+          "name": "season_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
           "autoincrement": false
         },
         "name": {
           "name": "name",
-          "type": "text(256)",
+          "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
-        "content": {
-          "name": "content",
-          "type": "text(256)",
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "release_date": {
+          "name": "release_date",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "quotes_episode_season_id_quotes_season_id_fk": {
+          "name": "quotes_episode_season_id_quotes_season_id_fk",
+          "tableFrom": "quotes_episode",
+          "tableTo": "quotes_season",
+          "columnsFrom": [
+            "season_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "quotes_quote": {
+      "name": "quotes_quote",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "episode_id": {
+          "name": "episode_id",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
-        "created_at": {
-          "name": "created_at",
+        "text": {
+          "name": "text",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "start_time": {
+          "name": "start_time",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false,
-          "default": "CURRENT_TIMESTAMP"
+          "autoincrement": false
         },
-        "updatedAt": {
-          "name": "updatedAt",
+        "end_time": {
+          "name": "end_time",
           "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "quotes_quote_episode_id_quotes_episode_id_fk": {
+          "name": "quotes_quote_episode_id_quotes_episode_id_fk",
+          "tableFrom": "quotes_quote",
+          "tableTo": "quotes_episode",
+          "columnsFrom": [
+            "episode_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "quotes_season": {
+      "name": "quotes_season",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "show_id": {
+          "name": "show_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "release_date": {
+          "name": "release_date",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "quotes_season_show_id_quotes_show_id_fk": {
+          "name": "quotes_season_show_id_quotes_show_id_fk",
+          "tableFrom": "quotes_season",
+          "tableTo": "quotes_show",
+          "columnsFrom": [
+            "show_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "quotes_show": {
+      "name": "quotes_show",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false

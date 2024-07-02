@@ -1,9 +1,10 @@
 import type { Metadata, Viewport } from "next";
+import { GeistMono } from "geist/font/mono";
+import { GeistSans } from "geist/font/sans";
+
 import { cn } from "@quotes/ui";
 import { ThemeProvider, ThemeToggle } from "@quotes/ui/theme";
 import { Toaster } from "@quotes/ui/toast";
-import { GeistMono } from "geist/font/mono";
-import { GeistSans } from "geist/font/sans";
 
 import { env } from "~/env";
 import { TRPCReactProvider } from "~/trpc/react";
@@ -51,7 +52,10 @@ export default function RootLayout(props: {
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <TRPCReactProvider>{props.children}</TRPCReactProvider>
+          <TRPCReactProvider>
+            <div className="sticky top-0 flex min-h-14 w-full items-center border-b bg-background shadow" />
+            {props.children}
+          </TRPCReactProvider>
           <div className="fixed bottom-4 right-4">
             <ThemeToggle />
           </div>
