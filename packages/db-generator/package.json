@@ -14,13 +14,13 @@
   },
   "dependencies": {
     "@quotes/db": "^0.1.0",
-    "@types/fluent-ffmpeg": "^2.1.24",
-    "@types/uuid": "^10.0.0",
     "fluent-ffmpeg": "^2.1.3",
     "srt-parser-2": "^1.2.3",
     "uuid": "^10.0.0"
   },
   "devDependencies": {
+    "@types/fluent-ffmpeg": "^2.1.24",
+    "@types/uuid": "^10.0.0",
     "@quotes/eslint-config": "^0.2.0",
     "@quotes/prettier-config": "^0.1.0",
     "@quotes/tsconfig": "^0.1.0",
