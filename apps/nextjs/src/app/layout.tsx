@@ -10,6 +10,7 @@ import { env } from "~/env";
 import { TRPCReactProvider } from "~/trpc/react";
 
 import "~/app/globals.css";
+import { Navbar } from "./_components/navbar";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -53,7 +54,7 @@ export default function RootLayout(props: {
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <TRPCReactProvider>
-            <div className="sticky top-0 flex min-h-14 w-full items-center border-b bg-background shadow" />
+            <Navbar />
             {props.children}
           </TRPCReactProvider>
           <div className="fixed bottom-4 right-4">
