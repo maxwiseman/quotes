@@ -10,7 +10,7 @@ export const episode = sqliteTable("episode", {
     .references(() => season.id),
   number: int("number"),
   title: text("name"),
-  fileName: text("file_name").notNull(),
+  filePath: text("file_path").notNull(),
   description: text("description"),
   releaseDate: int("release_date", { mode: "timestamp" }),
 });
@@ -49,7 +49,6 @@ export const season = sqliteTable("season", {
     .notNull()
     .references(() => show.id),
   title: text("name").notNull(),
-  dirName: text("dir_name").notNull(),
   number: int("number"),
   releaseDate: int("release_date", { mode: "timestamp" }),
   streamingLink: text("streaming_link"),
