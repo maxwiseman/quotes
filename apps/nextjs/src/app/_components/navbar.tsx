@@ -6,7 +6,7 @@ export async function Navbar(): Promise<React.ReactElement> {
   const showData = await db.query.show.findMany()
 
   return (
-    <Card className="rounded-none sticky top-0 flex gap-4 items-center p-4 justify-between border-0 border-b">
+    <Card className="rounded-none sticky z-50 top-0 flex gap-4 items-center p-4 justify-between border-0 border-b">
       <div className="text-lg font-bold">Quotes</div>
       <SearchBar shows={showData} />
       <div />

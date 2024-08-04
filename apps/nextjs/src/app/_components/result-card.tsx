@@ -23,7 +23,11 @@ export function ResultCard(resultData: { title: string | null, description: stri
         </CardHeader>
         <Separator />
         <CardContent className="flex gap-4 flex-col p-4">
-          {resultData.quotes.map((quote) => <Quote key={quote.id} text={quote.text} startTime={quote.startTime} endTime={quote.endTime} id={quote.id} />)}
+          {resultData.quotes.map((quote) => (
+            <Link href={`/episode/${resultData.id.toString()}#${quote.id.toString()}`}>
+              <Quote key={quote.id} text={quote.text} startTime={quote.startTime} endTime={quote.endTime} id={quote.id} />
+            </Link>
+          ))}
         </CardContent>
       </Card>
     </Link>

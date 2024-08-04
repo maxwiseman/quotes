@@ -3,6 +3,7 @@ import type { quote } from "@quotes/db";
 import { Separator } from "@quotes/ui/separator"
 import { notFound } from "next/navigation"
 import { Quote } from "~/app/_components/quote"
+import { QuoteList } from "./quote-list";
 
 export default async function Page({ params, searchParams }: { params: { episodeId: string }, searchParams: { qId?: string } }): Promise<React.ReactElement> {
 	const data = await db.query.episode.findFirst({
@@ -20,10 +21,8 @@ export default async function Page({ params, searchParams }: { params: { episode
 					<h1 className="text-4xl font-bold">{data.title ? data.title : `Episode ${data.number?.toString() ?? ""}`}</h1>
 					<h2>{data.description}</h2>
 				</div>
-				<Separator className="mb-8" />
-				<div className="flex gap-4 flex-col">
-					{data.quote.map((item) => <Quote id={item.id} scrollTo={parseInt(searchParams.qId ?? "") === item.id} text={item.text} startTime={item.startTime} endTime={item.endTime} key={item.id} />)}
-				</div>
+				<Separator className="mb-4" />
+				<QuoteList data={data} />
 
 			</div>
 		</div>

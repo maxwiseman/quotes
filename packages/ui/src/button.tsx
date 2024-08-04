@@ -39,7 +39,7 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   loading?: boolean;
   icon?: React.ReactElement;
@@ -47,7 +47,7 @@ export interface ButtonProps
 
 export interface LinkButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  VariantProps<typeof buttonVariants> {
   asChild?: boolean;
   loading?: boolean;
   icon?: React.ReactElement;
@@ -59,14 +59,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
     const StyledIcon = props.icon
       ? React.cloneElement(props.icon, {
-          className: cn(
-            "h-4 overflow-hidden transition-[width]",
-            !props.loading ? "mr-2 w-4" : "mr-0 w-0",
-            { "mr-0": size === "icon" },
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- this will either be a string or it wont be defined
-            props.icon.props?.className as string | undefined,
-          ),
-        })
+        className: cn(
+          "h-4 overflow-hidden transition-[width]",
+          !props.loading ? "mr-2 w-4" : "mr-0 w-0",
+          { "mr-0": size === "icon" },
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- this will either be a string or it wont be defined
+          props.icon.props?.className as string | undefined,
+        ),
+      })
       : null;
     const Comp = asChild ? Slot : "button";
     return (
@@ -111,18 +111,18 @@ const LinkButton = React.forwardRef<HTMLButtonElement, LinkButtonProps>(
     const Comp = asChild ? Slot : "button";
     const StyledIcon = props.icon
       ? React.cloneElement(props.icon, {
-          className: cn(
-            "mr-2 h-4 w-4",
-            { "mr-0": size === "icon" },
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- this will either be a string or it wont be defined
-            props.icon.props?.className as string | undefined,
-          ),
-        })
+        className: cn(
+          "mr-2 h-4 w-4",
+          { "mr-0": size === "icon" },
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- this will either be a string or it wont be defined
+          props.icon.props?.className as string | undefined,
+        ),
+      })
       : null;
     return (
       <Link href={href} tabIndex={-1} target={target}>
         <Comp
-          className={cn("w-full", buttonVariants({ variant, size, className }))}
+          className={cn("w-full", buttonVariants({ variant, size, className }), className)}
           ref={ref}
           {...props}
           disabled={props.disabled ?? props.loading}

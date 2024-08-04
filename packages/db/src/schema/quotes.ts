@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm";
-import { int, text } from "drizzle-orm/sqlite-core";
+import { index, int, text } from "drizzle-orm/sqlite-core";
 
 import { sqliteTable } from "./_table";
 
@@ -34,7 +34,9 @@ export const quote = sqliteTable("quote", {
   endTime: int("end_time").notNull(),
   character: text("character"),
   featured: int("featured", { mode: "boolean" })
-});
+}, (table) => ({
+  textIdx: index("text_index").on(table.text)
+}));
 
 export const quoteRelations = relations(quote, ({ one }) => ({
   episode: one(episode, {
