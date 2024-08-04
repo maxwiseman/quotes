@@ -2,10 +2,9 @@ import { db, episode, eq } from "@quotes/db"
 import type { quote } from "@quotes/db";
 import { Separator } from "@quotes/ui/separator"
 import { notFound } from "next/navigation"
-import { Quote } from "~/app/_components/quote"
 import { QuoteList } from "./quote-list";
 
-export default async function Page({ params, searchParams }: { params: { episodeId: string }, searchParams: { qId?: string } }): Promise<React.ReactElement> {
+export default async function Page({ params, searchParams }: { params: { episodeId: string }, searchParams: { qIdx?: string } }): Promise<React.ReactElement> {
 	const data = await db.query.episode.findFirst({
 		where: eq(episode.id, parseInt(params.episodeId)),
 		with: {
@@ -21,8 +20,8 @@ export default async function Page({ params, searchParams }: { params: { episode
 					<h1 className="text-4xl font-bold">{data.title ? data.title : `Episode ${data.number?.toString() ?? ""}`}</h1>
 					<h2>{data.description}</h2>
 				</div>
-				<Separator className="mb-4" />
-				<QuoteList data={data} />
+				<Separator className="mb-8" />
+				<QuoteList scrollIndex={searchParams.qIdx ? parseInt(searchParams.qIdx) : undefined} data={data} />
 
 			</div>
 		</div>
